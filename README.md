@@ -17,4 +17,5 @@ meetup clone with a twist of yelp
  * / ## shows all following and events
  * /user/id ## shows the user's review and reviews of them
  * /events/id ## descriptions and ability to reserve event/ review the user 
-https://dbdiagram.io/d/60dacd3ddd6a597148242352
+
+<iframe width="560" height="315" src='https://dbdiagram.io/embed/60dacd3ddd6a597148242352'> </iframe>
