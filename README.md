@@ -18,4 +18,4 @@ meetup clone with a twist of yelp
  * /user/id ## shows the user's review and reviews of them
  * /events/id ## descriptions and ability to reserve event/ review the user 
 
-<iframe width="560" height="315" src='https://dbdiagram.io/embed/60dacd3ddd6a597148242352'> </iframe>
+https://dbdiagram.io/d/60dacd3ddd6a597148242352
