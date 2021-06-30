@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
   age= db.Column(db.Integer(3), nullable = False)
   description= db.Column(db.String(500), nullable = False)
-  
+  follow= db.relationship("Following", secondary=following, backref="users")
 
   @property
   def password(self):
