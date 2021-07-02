@@ -1,6 +1,6 @@
 from .db import db
-from .following import Following
 from werkzeug.security import generate_password_hash, check_password_hash
+from .following import Following
 from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
   age= db.Column(db.Integer(), nullable = False)
   description= db.Column(db.String(500), nullable = False)
-  follow= db.relationship("Following", secondary=Following, backref="users")
+  follow= db.relationship("Following", secondary="following", primaryjoin=(Following.user_id == id), secondaryjoin=(Following.following_id == id), backref=db.backref("users", lazy='dynamic'))
 
   @property
   def password(self):
