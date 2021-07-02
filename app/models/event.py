@@ -10,7 +10,9 @@ class Event(db.Model):
     location = db.Column(db.String(255), nullable = False)
     city = db.Column(db.String(255), nullable = False)
     when = db.Column(db.String(255), nullable = False)
-    
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', backref=db.backref('events'))
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -19,5 +21,6 @@ class Event(db.Model):
             "category": self.category,
             "location": self.location,
             "city": self.city,
-            "when": self.when        
+            "when": self.when,
+            'userId': self.userId        
         }

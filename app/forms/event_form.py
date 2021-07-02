@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, RadioField, DateTimeField
+from wtforms import StringField, TextAreaField, RadioField, IntegerField
 from wtforms.validators import DataRequired
 
 class EventForm(FlaskForm):
@@ -9,4 +9,4 @@ class EventForm(FlaskForm):
     location = StringField('location', validators=[DataRequired()])
     city = StringField('city', validators=[DataRequired()])
     when = StringField("when", validators=[DataRequired()])
-
+    userId = IntegerField('userId', validators=[DataRequired()])

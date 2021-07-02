@@ -1,3 +1,4 @@
+from .event import Event
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from .following import Following
@@ -13,6 +14,7 @@ class User(db.Model, UserMixin):
   age= db.Column(db.Integer(), nullable = False)
   description= db.Column(db.String(500), nullable = False)
   follow= db.relationship("Following", secondary="following", primaryjoin=(Following.user_id == id), secondaryjoin=(Following.following_id == id), backref=db.backref("users", lazy='dynamic'))
+  event= db.relationship('Event', primaryjoin=(Event.userId == id), backref=db.backref('users'))
 
   @property
   def password(self):

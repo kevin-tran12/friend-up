@@ -25,7 +25,9 @@ def upgrade():
     sa.Column('category', sa.String(length=50), nullable=False),
     sa.Column('location', sa.String(length=255), nullable=False),
     sa.Column('city', sa.String(length=255), nullable=False),
-    sa.Column('when', sa.DateTime(), nullable=False),
+    sa.Column('when', sa.String(), nullable=False),
+    sa.Column('userId', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['userId'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('following',
