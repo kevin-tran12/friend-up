@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import User, Event
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +17,15 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/events/<int:id>')
+@login_required
+def userEvent(id):
+    userEvents = Event.query.filter_by(userId=id).all()
+    return {"userEvents": [userEvent.to_dict() for userEvent in userEvents]}
+
+@user_routes.route('/follow/<int:id>')
+@login_required
+def following(id,userId):
+    

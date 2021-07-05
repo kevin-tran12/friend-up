@@ -1,0 +1,83 @@
+html{
+    background-color: #221d28;
+    height: 100%;
+    width: 100%;
+    color: #9bdfd9;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.navContainer ul{
+    background-color: #394245;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    text-decoration: none;
+    font-size: 12px;
+    color: #9bdfd9;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    height: 2rem;
+}
+
+body{
+    margin: 0;
+}
+button{
+    background-color: #678788;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.react-datepicker{
+    width: 102%;
+}
+
+.Event{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y:auto;
+    justify-content: space-between;
+}
+
+h1,h2{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+h2{
+    text-align: center;
+}
+.event-container{
+    border: 2px solid black;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color:#394245;
+
+}
+
+.userPageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userCard{
+    border: 2px solid black;
+    background-color: #394245;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.userCard > h1{
+    text-align: center;
+}
+
+.event-container button{
+    margin-top: 1rem;
+}

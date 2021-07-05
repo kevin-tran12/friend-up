@@ -10,11 +10,13 @@ const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [age, setAge] = useState('')
+  const [description, setDescription] = useState('')
 
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, password, age, description));
     }
   };
 
@@ -34,6 +36,13 @@ const SignUpForm = () => {
     setRepeatPassword(e.target.value);
   };
 
+  const updateAge = e =>{
+    setAge(e.target.value)
+  }
+  const updateDescription = e =>{
+    setDescription(e.target.value)
+  }
+  
   if (user) {
     return <Redirect to="/" />;
   }
@@ -56,6 +65,24 @@ const SignUpForm = () => {
           name="email"
           onChange={updateEmail}
           value={email}
+        ></input>
+      </div>
+      <div>
+        <label>Age</label>
+        <input
+          type="text"
+          name="age"
+          onChange={updateAge}
+          value={age}
+        ></input>
+      </div>
+      <div>
+        <label>Description</label>
+        <input
+          type="text"
+          name="description"
+          onChange={updateDescription}
+          value={description}
         ></input>
       </div>
       <div>

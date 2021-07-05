@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../store/event";
@@ -8,7 +8,6 @@ import { createEvent } from "../../store/event";
 export default function EventForm(props) {
   const { closeForm } = props;
   const dispatch = useDispatch();
-  // const [time, setTime] = useState('');
   const [name, setName] = useState("");
   const [category, setCategory] = useState('Night Life');
   const [location, setLocation] = useState("");
@@ -16,15 +15,14 @@ export default function EventForm(props) {
   const [city, setCity] = useState("");
   const [date, setDate] = useState(new Date());
   const userId = useSelector((state) => state.session.user.id);
-  useEffect(() => {
-    console.log(description);
-  }, [description]);
+
   const create = async (e) => {
     e.preventDefault();
-    // closeForm();
-    await dispatch(
+    closeForm();
+    dispatch(
       createEvent(name, category, description, location, city, date, userId)
     );
+    // dispatch(loadAllEvents());
   };
   return (
     <>
@@ -89,12 +87,15 @@ export default function EventForm(props) {
         <div>
           <label>
             Date:
-            <DatePicker
+            <div className='react-datepicker'>
+              <DatePicker 
+              className='react-datepicker'
               selected={date}
               showTimeSelect
               dateFormat="MMMM d, yyyy h:mmaa"
               onChange={(date) => setDate(date)}
-            />
+              />
+            </div>
           </label>
         </div>
         <button className="button" type="submit">

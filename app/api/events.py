@@ -29,3 +29,26 @@ def add_events():
         db.session.add(event)
         db.session.commit()
     return '',200
+
+
+@event_routes.route('/delete/<int:id>', methods=["DELETE"])
+def delete_event(id):
+    event= Event.query.filter_by(id=id).first()
+    db.session.delete(event)
+    db.session.commit()
+    return '',200
+
+
+@event_routes.route('/update/<int:id>', methods=["PUT"])
+def update_event(id):
+    data=request.get_json()
+    event= Event.query.filter_by(id=id).first()
+    event.name=data['name']
+    event.category=data['category']
+    event.location=data['location']
+    event.description=data['description']
+    event.city=data['city']
+    event.when=data['when']
+    db.session.commit()
+    return '',200
+    

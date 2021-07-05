@@ -8,22 +8,20 @@
 
 .modal{
     position: absolute;
-    z-index: 500;
+    top: 20%;
+    left: 15%;
     width: fit-content;
     height: fit-content;
     border: 2px solid black;
     margin: 0 auto;
     background-color: #394245;
     color: #5b8b9e;
-    display: block;
+    display: table;
     transition: transform .5s ease;
     box-shadow: 0 5px 5px 5px;
     transform: translateX(200%);
 }
 
-.datePicker{
-    background-color: #F8F8FF;
-}
 
 .modal input{
     background-color: #F8F8FF;
@@ -36,15 +34,4 @@
     cursor: crosshair;
     color: #5b8b9e;
     font-size: 12px;
-}
-.react-time-picker__inputGroup__input{
-    min-width: 1.5em;
-}
-
-.react-time-picker__inputGroup__amPm{
-    background-color: #F8F8FF;
-}
-
-.react-time-picker__button:enabled{
-    cursor: crosshair;
 }
