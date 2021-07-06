@@ -83,9 +83,17 @@ export const signUp =
     return {};
   };
 
-export const followUsers = (sessUser,userId) => async dispatch =>{
-  console.log(sessUser, userId)
-  const res = await fetch(`/api/users/follow/${sessUser}`)
+export const followUsers = (userId,sessUser) => async dispatch =>{
+  const res = await fetch(`/api/follows/${sessUser}`,{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      sessUser,
+      userId
+    }),
+  });
   dispatch(followUser(sessUser,userId))
 }
 

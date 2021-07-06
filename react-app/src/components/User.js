@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import EventPage from "./userPage/EventPage";
-import {followUsers} from '../store/session'
+import {followUsers} from '../store/session';
+import FollowingPage from "./userPage/Following";
 function User() {
   const [user, setUser] = useState({});
   // Notice we use useParams here instead of getting the params
@@ -27,12 +28,12 @@ function User() {
   }, [userId]);
 
   const follow = () =>{
-    dispatch(followUsers(userId, sessUser.id))
+    dispatch(followUsers(Number(userId), sessUser.id))
   }
   if (!user) {
     return null;
   }
-
+  console.log(sessUser)
   return (
     <div className='userPageContainer'>
       <div className='userCard'>
@@ -44,6 +45,7 @@ function User() {
         )}
       </div>
       <EventPage />
+      <FollowingPage userId={userId} />
     </div>
   );
 }

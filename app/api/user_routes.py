@@ -25,7 +25,3 @@ def userEvent(id):
     userEvents = Event.query.filter_by(userId=id).all()
     return {"userEvents": [userEvent.to_dict() for userEvent in userEvents]}
 
-@user_routes.route('/follow/<int:id>')
-@login_required
-def following(id,userId):
-    

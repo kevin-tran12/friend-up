@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { loadUserEvents, removeEvent, updateEvent } from "../../store/event";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
 export default function EventPage() {
   const userId = useParams();
   const dispatch = useDispatch();
