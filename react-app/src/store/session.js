@@ -1,7 +1,7 @@
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
-const FOLLOW_USER = 'session/FOLLOW_USER';
+
 // action creators
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,10 +12,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 });
 
-const followUser = (payload) =>({
-  type:FOLLOW_USER,
-  follow: payload
-})
+
 // thunks
 
 export const authenticate = () => async (dispatch) => {
@@ -83,19 +80,6 @@ export const signUp =
     return {};
   };
 
-export const followUsers = (userId,sessUser) => async dispatch =>{
-  const res = await fetch(`/api/follows/${sessUser}`,{
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      sessUser,
-      userId
-    }),
-  });
-  dispatch(followUser(sessUser,userId))
-}
 
 const initialState = { user: null };
 
@@ -105,11 +89,6 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload };
     case REMOVE_USER:
       return { user: null };
-    case FOLLOW_USER:
-      const newState= {...state}
-      if(!newState['user'].following)newState['user'].following=(action.follow)
-      else newState['user'].following = newState['user'].following+','+(action.follow)
-      return newState
     default:
       return state;
   }

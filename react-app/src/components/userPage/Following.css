@@ -1,0 +1,10 @@
+.sideNav{
+    height: 100%;
+    background-color: #394245;
+    /* width: 100%; */
+    position: fixed;
+    left: 0;
+    z-index: 1;
+    overflow-x: hidden;
+    width: 175px;
+}
