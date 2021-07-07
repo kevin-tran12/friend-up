@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../store/event";
@@ -8,12 +8,15 @@ import { createEvent } from "../../store/event";
 export default function EventForm(props) {
   const { closeForm } = props;
   const dispatch = useDispatch();
+  const dayte = moment()
+  const nextDay = moment((dayte).add(1,'days'))
+
   const [name, setName] = useState("");
   const [category, setCategory] = useState('Night Life');
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [city, setCity] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(nextDay));
   const userId = useSelector((state) => state.session.user.id);
 
   const create = async (e) => {
@@ -22,7 +25,7 @@ export default function EventForm(props) {
     dispatch(
       createEvent(name, category, description, location, city, date, userId)
     );
-    // dispatch(loadAllEvents());
+
   };
   return (
     <>
@@ -87,11 +90,11 @@ export default function EventForm(props) {
         <div>
           <label>
             Date:
-            <div className='react-datepicker'>
-              <DatePicker 
-              className='react-datepicker'
+            <div className='dates'>
+              <DatePicker wrapperClassName='datepicker'
               selected={date}
               showTimeSelect
+              minDate={new Date(nextDay)}
               dateFormat="MMMM d, yyyy h:mmaa"
               onChange={(date) => setDate(date)}
               />

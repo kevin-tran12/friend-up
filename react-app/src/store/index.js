@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import eventReducer from "./event";
 import followingReducer from "./follow";
+import reserveReducer from "./reserve";
 
 const rootReducer = combineReducers({
   session:sessionReducer,
   event:eventReducer,
-  follow:followingReducer
+  follow:followingReducer,
+  reserve:reserveReducer
 });
 
 let enhancer;

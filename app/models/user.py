@@ -13,7 +13,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
   age= db.Column(db.Integer(), nullable = False)
   description= db.Column(db.String(500), nullable = False)
-  follow= db.relationship("Following", secondary="following", primaryjoin=(Following.user_id == id), secondaryjoin=(Following.following_id == id), backref=db.backref("users", lazy='dynamic'))
+  follow= db.relationship("User", secondary='following', primaryjoin=(Following.user_id == id), secondaryjoin=(Following.following_id == id), backref=db.backref("users", lazy='dynamic'))
   event= db.relationship('Event', primaryjoin=(Event.userId == id), backref=db.backref('users'))
 
   @property

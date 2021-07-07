@@ -2,21 +2,27 @@ import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { loadAllEvents } from "../../store/event";
 import {Link} from 'react-router-dom';
+import { reserveEvent, unreserveEvent } from "../../store/reserve";
 
 export default function Event() {
   const dispatch = useDispatch()
   const events = useSelector(state => Object.values(state.event))
-  const getUser = async function getting(id){
-    const res = await fetch(`/api/users/${id}`)
-    const data = await res.json()
-    
-    return `${data.username}`
-  }
+  const userId = useSelector(state => state.session.user.id)
+  const reserved = useSelector(state => state.reserve)
 
   useEffect(()=>{
     dispatch(loadAllEvents())
   },[dispatch])
+  const reserve = (e) =>{
+    e.preventDefault()
 
+    dispatch(reserveEvent(userId,Number(e.target.value)))
+
+  }
+  const unreserve = (e) =>{
+    e.preventDefault()
+    dispatch(unreserveEvent(userId, Number(e.target.value)))
+  }
   if(!events) return(
     <div>Loading...</div>
   )
@@ -33,7 +39,11 @@ export default function Event() {
                   <div>City: {event.city}</div>
                   <div>Location: {event.location}</div>
                   <div>Date and Time: {event.when.slice(0,24)}</div>
-                  <Link to={`/users/${event.userId}`}><button>Click here to see user</button></Link>
+                  <div className='event buttons'>
+                  <Link to={`/users/${event.userId}`}><button>Click Here to See User</button></Link>
+                  {!(event.userId ==userId)&&(
+                    <div>{reserved[event.id] ? <button value={`${event.id}`} onClick={unreserve}>Unreserve</button>:<button value={`${event.id}`} onClick={reserve}>Click to Join</button>}</div>)}
+                  </div>
               </div>
             ))
           )}

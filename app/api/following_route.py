@@ -24,3 +24,16 @@ def following(id):
             followers= User.query.filter_by(id=follow.following_id).first()
             list.append(followers)
         return {'follow': [user.to_dict() for user in list]}
+
+
+@follow_routes.route('/delete/<int:id>', methods=["DELETE"])
+@login_required
+def unfollow(id):
+    data = request.get_json()
+    user_id = data['userId']
+    sess_user = data['sessUser']
+    unfollows=Following.query.filter_by(user_id=sess_user, following_id=user_id).first()
+    print(unfollows)
+    db.session.delete(unfollows)
+    db.session.commit()
+    return '',200
