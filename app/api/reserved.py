@@ -21,8 +21,21 @@ def reserving(id):
         return '',200
 
     else:
-        reserves = Reserved.query.filter_by(user_id=id).all()
-        return {'reserve': [reserve.to_dict() for reserve in reserves]}
+        reserves = db.session.query(Reserved, Event).join(Event).filter(Reserved.event_id==id).all()
+        # parsed = [reserve.to_dict() for reserve in reserves]
+        # print(type(parsed))
+        # print(type(reserves))
+        print(type(reserves))
+        dict = {}
+        for reserve, event in reserves:
+            dict.update({
+                'id': reserve.id,
+                'user_id': reserve.user_id,
+                'event_id': reserve.event_id,
+                'name': event.name
+            })
+        
+        return {'reserve': [dict]}
 
 
 @reserve_routes.route('/delete/<int:id>', methods=["DELETE"])

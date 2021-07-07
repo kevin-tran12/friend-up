@@ -1,6 +1,6 @@
 const GET_RESERVE = 'reserve/GET_RESERVE'
 const REMOVE_RESERVE = 'reserve/REMOVE_RESERVE'
-
+const CLEAR_RESERVE = 'reserve/CLEAR_RESERVE'
 
 const getReserves = (reserves) =>({
     type: GET_RESERVE,
@@ -12,12 +12,16 @@ const removeReserves = (reserves) =>({
   reserve: reserves
 })
 
+export const clearReserves=() =>({
+  type:CLEAR_RESERVE,
+})
 
 
 export const loadAllReserves = (id) => async (dispatch) => {
     const res = await fetch(`/api/reserves/${id}`);
     if (!res.ok) return;
     const data = await res.json();
+    console.log(data)
     dispatch(getReserves(data));
     return data;
   };
@@ -58,8 +62,8 @@ export default function reserveReducer(state = {}, action) {
     let newState={}
   switch (action.type) {
     case GET_RESERVE:
+      console.log(action.reserve.reserve)
       newState = {...state };
-      console.log(action)
       action.reserve.reserve.forEach((reserving) =>{
         newState[reserving['event_id']]=reserving
       })
@@ -68,6 +72,9 @@ export default function reserveReducer(state = {}, action) {
      newState={...state}
      delete newState[action.reserve]
      return newState
+    case CLEAR_RESERVE:
+      console.log('clearing')
+      return newState
     default:
       return state;
   }

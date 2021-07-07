@@ -13,14 +13,7 @@ export default function FollowingPage(props) {
     dispatch(loadAllFollow(userId));
     dispatch(loadAllReserves(userId));
   }, [dispatch]);
-  let goingTo = []
   const reservedEvent = useSelector(state => Object.values(state.reserve))
-  const events = useSelector(state => Object.values(state.event))
-  reservedEvent.forEach(r =>{
-    events.forEach(e =>{
-      if(e.id==r.event_id) goingTo.push(e)
-    })
-  })
 
   return (
     <div className="sideNav">
@@ -32,8 +25,9 @@ export default function FollowingPage(props) {
         </NavLink></li>
       ))}
       </ul>
-      <ul className="ListItems">{goingTo?.map((reserve) =>(
-        <li key={reserve.id}><NavLink to={`/users/${reserve.userId}`}><button>{reserve.name}</button></NavLink></li>
+      <h2>Reserved:</h2>
+      <ul className="ListItems">{reservedEvent?.map((reserve) =>(
+        <li key={reserve.id}><NavLink to={`/users/${reserve.user_id}`}><button>{reserve.name}</button></NavLink></li>
       ))}</ul>
     </div>
   );

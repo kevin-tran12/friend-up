@@ -1,24 +1,29 @@
 import React, {useState} from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import EventForm from './mainPage/CreateEvent';
 import "react-datepicker/dist/react-datepicker.css";
 import "./nav.css";
+import { login } from '../store/session';
 
 const NavBar = () => {
   let user = useSelector(state => state.session.user)
+  const dispatch = useDispatch()
   const [form, setForm] = useState(false);
   const closeForm = () => setForm(false);
+  const logDemo = () => dispatch(login('demo@aa.io','password'))
+  
+
   return (
     <nav className='navContainer'>
 
       <ul className='navItems'>
-        <li>
+        {user &&(<li>
           <NavLink to="/" exact={true} activeClassName="active">
             <button>Home</button>
           </NavLink>
-        </li>
+        </li>)}
         {user&& (<li>
           <NavLink to={`/users/${user.id}`} exact={true} activeClassName="active">
           <button>My Page</button>
@@ -41,6 +46,9 @@ const NavBar = () => {
           <NavLink to="/sign-up" exact={true} activeClassName="active">
           <button>Sign Up</button>
           </NavLink>
+        </li>)}
+        {!user &&(<li>         
+          <button onClick={logDemo}>Demo Login</button>
         </li>)}
         {user&& (<li>
           <NavLink to="/users" exact={true} activeClassName="active">

@@ -9,7 +9,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const logDemo = () => dispatch(login('demo@aa.io','password'))
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
@@ -57,6 +57,7 @@ const LoginForm = () => {
           onChange={updatePassword}
         />
         <button type="submit">Login</button>
+        <button onClick={logDemo}>Demo Login</button>
       </div>
     </form>
   );

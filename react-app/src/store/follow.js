@@ -1,5 +1,6 @@
 const GET_FOLLOW = 'following/GET_FOLLOW'
 const REMOVE_FOLLOW = 'following/REMOVE_FOLLOW'
+const CLEAR_STATE = 'following/CLEAR_STATE'
 
 const getFollow = (follows) =>({
     type: GET_FOLLOW,
@@ -9,6 +10,10 @@ const getFollow = (follows) =>({
 const removeFollow = (follows) =>({
   type: REMOVE_FOLLOW,
   follow: follows
+})
+
+export const clearFollow =() =>({
+  type:CLEAR_STATE,
 })
 
 export const loadAllFollow = (id) => async (dispatch) => {
@@ -66,6 +71,8 @@ export default function followingReducer(state = {}, action) {
      newState={...state}
      delete newState[action.follow]
      return newState
+    case CLEAR_STATE:
+      return newState
     default:
       return state;
   }

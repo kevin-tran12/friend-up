@@ -1,5 +1,7 @@
 const GET_EVENTS = "events/GET_EVENTS";
 const GET_USER_EVENTS = "events/GET_USER_EVENTS";
+const CLEAR_EVENTS = "events/CLEAR_EVENTS"
+
 const getEvents = (events) => ({
   type:GET_EVENTS,
   events:events,
@@ -9,6 +11,7 @@ const getUserEvents = (userEvents) =>({
   type: GET_USER_EVENTS,
   userEvents:userEvents,
 })
+export const clearEvents= () =>({type:CLEAR_EVENTS})
 
 export const createEvent = (name, category, description, location, city, date, userId) => async (dispatch) => {
   const when = date.toString()
@@ -95,7 +98,8 @@ export default function eventReducer(state = {}, action) {
         newState[userEvent['id']]= userEvent
       })
       return newState;
-
+      case CLEAR_EVENTS:
+        return newState
     default:
         return state;
   }

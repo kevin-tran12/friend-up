@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { login } from "../../store/session";
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [age, setAge] = useState('')
   const [description, setDescription] = useState('')
-
+  const logDemo = () => dispatch(login('demo@aa.io','password'))
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
@@ -105,6 +106,7 @@ const SignUpForm = () => {
         ></input>
       </div>
       <button type="submit">Sign Up</button>
+      <button onClick={logDemo}>Demo Login</button>
     </form>
   );
 };
