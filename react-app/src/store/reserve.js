@@ -21,13 +21,12 @@ export const loadAllReserves = (id) => async (dispatch) => {
     const res = await fetch(`/api/reserves/${id}`);
     if (!res.ok) return;
     const data = await res.json();
-    console.log(data)
     dispatch(getReserves(data));
     return data;
   };
 
+
 export const reserveEvent = (userId, eventId) => async (dispatch) => {
-  console.log('reservingevent', userId)
   const res = await fetch(`/api/reserves/${userId}`, {
     method: "POST",
     headers: {
@@ -62,7 +61,6 @@ export default function reserveReducer(state = {}, action) {
     let newState={}
   switch (action.type) {
     case GET_RESERVE:
-      console.log(action.reserve.reserve)
       newState = {...state };
       action.reserve.reserve.forEach((reserving) =>{
         newState[reserving['event_id']]=reserving
@@ -73,7 +71,6 @@ export default function reserveReducer(state = {}, action) {
      delete newState[action.reserve]
      return newState
     case CLEAR_RESERVE:
-      console.log('clearing')
       return newState
     default:
       return state;

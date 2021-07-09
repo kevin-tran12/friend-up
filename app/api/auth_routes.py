@@ -46,14 +46,6 @@ def login():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@auth_routes.route('/demologin', methods=['POST'])
-def demologin():
-
-    user = User.query.filter(User.username == 'Demo').first()
-    login_user(user)
-    return user.to_dict()
-
-
 @auth_routes.route('/logout')
 def logout():
     """

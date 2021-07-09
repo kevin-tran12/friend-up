@@ -33,7 +33,6 @@ def unfollow(id):
     user_id = data['userId']
     sess_user = data['sessUser']
     unfollows=Following.query.filter_by(user_id=sess_user, following_id=user_id).first()
-    print(unfollows)
     db.session.delete(unfollows)
     db.session.commit()
     return '',200

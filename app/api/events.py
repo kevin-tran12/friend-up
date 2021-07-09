@@ -13,9 +13,9 @@ def get_events():
 
 @event_routes.route('/create', methods=["POST"])
 def add_events():
+    print('hit the post')
     form = EventForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print(form.data)
     if form.validate_on_submit():
         event=Event(
             name=form.data['name'],

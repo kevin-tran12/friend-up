@@ -1,1 +1,27 @@
 /* TODO Add site wide styles */
+.About{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    background-color: #394245;
+    margin-top: 1%;
+    border-radius: 15px;
+    width: max-content;
+}
+
+.images{
+    display: flex;
+    flex-direction: row;
+    margin-top: 1%;
+}
+
+.login-form{
+    display: flex;
+    background-color: #394245;
+    width: max-content;
+    height: min-content;
+    border-radius: 15px;
+}
+

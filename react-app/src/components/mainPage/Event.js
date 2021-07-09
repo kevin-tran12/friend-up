@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { loadAllEvents } from "../../store/event";
 import {Link} from 'react-router-dom';
@@ -15,7 +15,6 @@ export default function Event() {
   },[dispatch])
   const reserve = (e) =>{
     e.preventDefault()
-
     dispatch(reserveEvent(userId,Number(e.target.value)))
 
   }
@@ -23,6 +22,7 @@ export default function Event() {
     e.preventDefault()
     dispatch(unreserveEvent(userId, Number(e.target.value)))
   }
+
   if(!events) return(
     <div>Loading...</div>
   )
@@ -33,14 +33,14 @@ export default function Event() {
           {events &&(
             events.map(event =>(
               <div className="event-container">
-                <h2>{event.name}</h2>
+                <Link to={`/users/${event.userId}`}><h2 className='eventName'>{event.name}</h2></Link>
                   <div>Description: {event.description}</div>
                   <div>Category: {event.category}</div>
                   <div>City: {event.city}</div>
                   <div>Location: {event.location}</div>
                   <div>Date and Time: {event.when.slice(0,24)}</div>
                   <div className='event buttons'>
-                  <Link to={`/users/${event.userId}`}><button>Click Here to See User</button></Link>
+                  {userId==event.userId ? <div></div>:<Link to={`/users/${event.userId}`}><button>Click Here to See User</button></Link>}
                   {!(event.userId ==userId)&&(
                     <div>{reserved[event.id] ? <button value={`${event.id}`} onClick={unreserve}>Unreserve</button>:<button value={`${event.id}`} onClick={reserve}>Click to Join</button>}</div>)}
                   </div>

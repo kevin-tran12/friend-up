@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { loadUserEvents, removeEvent, updateEvent } from "../../store/event";
 import DatePicker from "react-datepicker";
 
@@ -9,10 +9,10 @@ export default function EventPage() {
   const dispatch = useDispatch();
   const sessUser = useSelector((state) => state.session.user.id);
   const events = useSelector((state) => Object.values(state.event));
-  const eventId = useSelector(state => state.event)
+  const eventId = useSelector((state) => state.event);
   const [form, setForm] = useState(false);
+  const [going, setGoing] = useState(false);
   const closeForm = () => setForm(false);
-
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Night Life");
   const [location, setLocation] = useState("");
@@ -23,16 +23,15 @@ export default function EventPage() {
 
   const openForm = (e) => {
     setForm(true);
-    const props = eventId[e.target.value]
-    setName(props.name)
-    setCategory(props.category)
-    setCity(props.city)
-    setLocation(props.location)
-    setDate(new Date(props.when))
-    setDescription(props.description)
-    setId(props.id)
+    const props = eventId[e.target.value];
+    setName(props.name);
+    setCategory(props.category);
+    setCity(props.city);
+    setLocation(props.location);
+    setDate(new Date(props.when));
+    setDescription(props.description);
+    setId(props.id);
   };
-
 
   useEffect(() => {
     dispatch(loadUserEvents(Object.values(userId)[0]));
@@ -44,9 +43,26 @@ export default function EventPage() {
   const editEvent = (e) => {
     e.preventDefault();
     closeForm();
-    dispatch(updateEvent(name, category, description, location, city, date, Object.values(userId)[0],id))
+    dispatch(
+      updateEvent(
+        name,
+        category,
+        description,
+        location,
+        city,
+        date,
+        Object.values(userId)[0],
+        id
+      )
+    );
   };
 
+  const showGoing = async (e) => {
+    setGoing(true);
+  };
+  const closeGoing = (e) => {
+    setGoing(false);
+  };
   return (
     <>
       <div className="Event">
@@ -60,9 +76,11 @@ export default function EventPage() {
                   <button value={event.id} onClick={deleteItem}>
                     Cancel Event
                   </button>
-                  <button value={event.id} onClick={openForm}>Edit Event</button>
+                  <button value={event.id} onClick={openForm}>
+                    Edit Event
+                  </button>
                   {form && (
-                    <div className='modal'>
+                    <div className="modal">
                       <button id="close" onClick={() => setForm(false)}>
                         X
                       </button>
@@ -130,12 +148,12 @@ export default function EventPage() {
                             Date:
                             <div>
                               <DatePicker
-                                className='react-datepicker'
+                                className="react-datepicker"
                                 selected={date}
                                 showTimeSelect
                                 dateFormat="MMMM d, yyyy h:mmaa"
                                 onChange={(date) => setDate(date)}
-                                />
+                              />
                             </div>
                           </label>
                         </div>
@@ -154,6 +172,34 @@ export default function EventPage() {
                   <div>City: {event.city}</div>
                   <div>Location: {event.location}</div>
                   <div>Date and Time: {event.when.slice(0, 24)}</div>
+                  <div>
+                    {!going ? (
+                      <button value={event.id} onClick={showGoing}>
+                        See who's going
+                      </button>
+                    ) : (
+                      <div>
+                        <h3>Reserved:</h3>
+                        {event?.reserved?.map((person) => (
+                          <ul>
+                            <li>
+                              <Link
+                                to={`/users/${person.userId}`}
+                                className="btn"
+                              >
+                                <button onClick={closeGoing}>
+                                  {person.users}
+                                </button>
+                              </Link>
+                            </li>
+                          </ul>
+                        ))}
+                        <button value={event.id} onClick={closeGoing}>
+                          Close
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

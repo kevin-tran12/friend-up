@@ -1,5 +1,6 @@
+
 from flask import Blueprint,request
-from app.models import Reserved, Event, db
+from app.models import Reserved, Event, User, db
 from flask_login import login_required
 import json
 
@@ -21,11 +22,7 @@ def reserving(id):
         return '',200
 
     else:
-        reserves = db.session.query(Reserved, Event).join(Event).filter(Reserved.event_id==id).all()
-        # parsed = [reserve.to_dict() for reserve in reserves]
-        # print(type(parsed))
-        # print(type(reserves))
-        print(type(reserves))
+        reserves = db.session.query(Reserved, Event).join(Event).filter(Reserved.user_id==id).all()
         dict = {}
         for reserve, event in reserves:
             dict.update({
@@ -34,7 +31,8 @@ def reserving(id):
                 'event_id': reserve.event_id,
                 'name': event.name
             })
-        
+        if len(dict)==0:
+            return '',200
         return {'reserve': [dict]}
 
 
@@ -48,3 +46,20 @@ def unreserve(id):
     db.session.delete(unreserve)
     db.session.commit()
     return json.dumps(unreserve.id)
+
+@reserve_routes.route('/event/<int:id>')
+@login_required
+def reservedEvent(id):
+        reserves = db.session.query(Reserved, User).join(User).filter(Reserved.event_id==id).all()
+        dict = []
+        for reserve, user in reserves:
+            dict.append({
+                'id': reserve.id,
+                'user_id': reserve.user_id,
+                'event_id': reserve.event_id,
+                'name': user.username,
+            })
+        if len(dict)==0:
+            return '',200
+
+        return {'reserve': dict}

@@ -94,3 +94,7 @@ h2{
 .userList button{
     margin: 5px;
 }
+
+.react-datepicker{
+    display: inline-flex !important;
+}

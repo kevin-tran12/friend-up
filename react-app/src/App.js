@@ -10,6 +10,7 @@ import UsersList from "./components/UsersList";
 import User from "./components/User";
 import { authenticate } from "./store/session";
 import FollowingPage from "./components/userPage/Following";
+import Footer from "./components/Footer";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
@@ -49,6 +50,7 @@ function App() {
           <Main />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

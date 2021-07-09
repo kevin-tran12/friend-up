@@ -12,7 +12,7 @@ export default function FollowingPage(props) {
   useEffect(() => {
     dispatch(loadAllFollow(userId));
     dispatch(loadAllReserves(userId));
-  }, [dispatch]);
+  }, [dispatch,userId]);
   const reservedEvent = useSelector(state => Object.values(state.reserve))
 
   return (
