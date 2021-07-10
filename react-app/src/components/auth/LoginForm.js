@@ -9,7 +9,11 @@ const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const logDemo = () => dispatch(login("demo@aa.io", "password"));
+  const logDemo = () =>{
+    setEmail("demo@aa.io")
+    setPassword("password")
+    dispatch(login(email,password ));
+  }
   const onLogin = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));

@@ -5,7 +5,7 @@ class Reserved(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
-    event_id = db.Column(db.Integer, db.ForeignKey('events.id'), nullable= False)
+    event_id = db.Column(db.Integer, db.ForeignKey('events.id', ondelete='CASCADE'), nullable= False)
     
     def to_dict(self):
         return{

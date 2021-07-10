@@ -12,6 +12,7 @@ class Event(db.Model):
     when = db.Column(db.String(255), nullable = False)
     userId = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', backref=db.backref('events'))
+    reserved= db.relationship('Reserved',cascade='all,delete', backref= db.backref('events'))
 
     def to_dict(self):
         return {
