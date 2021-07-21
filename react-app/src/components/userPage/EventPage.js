@@ -69,7 +69,7 @@ export default function EventPage() {
         <h1>Events</h1>
         {events &&
           events.map((event) => (
-            <div className="event-container">
+            <div className="event-container-user">
               <h2>{event.name}</h2>
               {sessUser == userId.userId && (
                 <div>

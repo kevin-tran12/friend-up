@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadAllFollow } from "../../store/follow";
-import "./Following.css";
 import { NavLink } from "react-router-dom";
 import { loadAllReserves } from "../../store/reserve";
 

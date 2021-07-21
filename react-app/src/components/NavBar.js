@@ -3,51 +3,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LogoutButton from "./auth/LogoutButton";
 import EventForm from "./mainPage/CreateEvent";
-import "react-datepicker/dist/react-datepicker.css";
-import "./nav.css";
+import {Navbar, Modal} from 'react-bootstrap';
 import { login } from "../store/session";
 
 const NavBar = () => {
   let user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
   const [form, setForm] = useState(false);
+  const openForm = () => setForm(true)
   const closeForm = () => setForm(false);
   const logDemo = () => dispatch(login("demo@aa.io", "password"));
 
   return (
-    <nav className="navContainer">
-      <ul className="navItems">
+    <Navbar bg='dark' variant='dark'>
         {user && (
-          <li>
-            <NavLink to="/" exact={true} activeClassName="active">
+            <Navbar.Brand href="/" exact={true} activeClassName="active">
               <button>Home</button>
-            </NavLink>
-          </li>
+            </Navbar.Brand>
         )}
         {user && (
           <li>
-            <NavLink
+            <Navbar.Brand
               to={`/users/${user.id}`}
               exact={true}
               activeClassName="active"
             >
               <button>My Page</button>
-            </NavLink>
+            </Navbar.Brand>
           </li>
         )}
         {user && (
-          <li>
-            <button onClick={() => setForm(true)}>Create An Event</button>
-            {form && (
-              <div className="modal">
-                <button id="close" onClick={() => setForm(false)}>
-                  X
-                </button>
-                <EventForm closeForm={closeForm} />
-              </div>
+            <Navbar.Brand>
+              <button onClick={openForm}>Create An Event</button>
+            </Navbar.Brand>
             )}
-          </li>
-        )}
+          <Modal show={form} onHide={closeForm}>
+            <EventForm/>
+          </Modal>
         {!user && (
           <li>
             <NavLink to="/login" exact={true} activeClassName="active">
@@ -79,8 +71,7 @@ const NavBar = () => {
             <LogoutButton />
           </li>
         )}
-      </ul>
-    </nav>
+    </Navbar>
   );
 };
 

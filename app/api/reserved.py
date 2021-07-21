@@ -23,6 +23,8 @@ def reserving(id):
 
     else:
         reserves = db.session.query(Reserved, Event).join(Event).filter(Reserved.user_id==id).all()
+        if len(reserves)==0:
+            return '',204
         dict = []
         for reserve, event in reserves:
             dict.append({
@@ -33,6 +35,7 @@ def reserving(id):
             })
         if len(dict)==0:
             return '',200
+        print(dict)
         return {'reserve': dict}
 
 

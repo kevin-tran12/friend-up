@@ -29,7 +29,7 @@ export default function Event() {
   return (
     <>
       <div className="Event">
-        <h1>Events</h1>
+        <h1 className='header-event'>Events</h1>
           {events &&(
             events.map(event =>(
               <div className="event-container">

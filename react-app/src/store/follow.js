@@ -17,7 +17,12 @@ export const clearFollow =() =>({
 })
 
 export const loadAllFollow = (id) => async (dispatch) => {
-    const res = await fetch(`/api/follows/${id}`);
+    const res = await fetch(`/api/follows/${Number(id)}`,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    });
   
     if (!res.ok) return;
     const data = await res.json();
@@ -27,11 +32,12 @@ export const loadAllFollow = (id) => async (dispatch) => {
   };
 
 export const followUsers = (userId, sessUser) => async (dispatch) => {
-  const res = await fetch(`/api/follows/${sessUser}`, {
+  const res = await fetch(`/api/follows/${Number(sessUser)}`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     },
     body: JSON.stringify({
       sessUser,
       userId,
@@ -44,11 +50,12 @@ export const followUsers = (userId, sessUser) => async (dispatch) => {
 };
 
 export const unfollowUser= (userId, sessUser) => async (dispatch) =>{
-  const res = await fetch(`/api/follows/delete/${sessUser}`,{
+  const res = await fetch(`/api/follows/delete/${Number(sessUser)}`,{
     method: 'DELETE',
-    headers:{
-      "Content-Type": "application/json",
-    },
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     },
     body: JSON.stringify({
       sessUser,
       userId,

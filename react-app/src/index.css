@@ -1,27 +1,18 @@
 /* TODO Add site wide styles */
-.About{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-content: center;
-    background-color: #394245;
-    margin-top: 1%;
-    border-radius: 15px;
-    width: max-content;
+html{
+    background-color: #221d28;
+    height: 100%;
+    width: 100%;
+    color: #9bdfd9;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
-.images{
-    display: flex;
-    flex-direction: row;
-    margin-top: 1%;
+body{
+    margin: 0;
 }
-
-.login-form{
-    display: flex;
-    background-color: #394245;
-    width: max-content;
-    height: min-content;
-    border-radius: 15px;
+button{
+    background-color: #678788;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #9bdfd9;
 }
-

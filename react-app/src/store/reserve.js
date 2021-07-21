@@ -18,8 +18,13 @@ export const clearReserves=() =>({
 
 
 export const loadAllReserves = (id) => async (dispatch) => {
-    const res = await fetch(`/api/reserves/${id}`);
-    if (!res.ok) return;
+    const res = await fetch(`/api/reserves/${Number(id)}`,{
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    });
+    if (res.status!==200) return;
     const data = await res.json();
     dispatch(getReserves(data));
     return data;
@@ -27,7 +32,7 @@ export const loadAllReserves = (id) => async (dispatch) => {
 
 
 export const reserveEvent = (userId, eventId) => async (dispatch) => {
-  const res = await fetch(`/api/reserves/${userId}`, {
+  const res = await fetch(`/api/reserves/${Number(userId)}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +48,7 @@ export const reserveEvent = (userId, eventId) => async (dispatch) => {
 };
 
 export const unreserveEvent = (userId, eventId) => async (dispatch) =>{
-  const res = await fetch(`/api/reserves/delete/${userId}`,{
+  const res = await fetch(`/api/reserves/delete/${Number(userId)}`,{
     method: 'DELETE',
     headers:{
       "Content-Type": "application/json",

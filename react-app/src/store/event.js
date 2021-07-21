@@ -24,7 +24,8 @@ export const clearEvents= () =>({type:CLEAR_EVENTS})
 
 export const createEvent = (name, category, description, location, city, date, userId) => async (dispatch) => {
   const when = date.toString()
-  const res = await fetch("http://localhost:3000/api/events/create", {
+  const url = window.location.origin
+  const res = await fetch(`${url}/api/events/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -43,7 +44,11 @@ export const createEvent = (name, category, description, location, city, date, u
 };
 
 export const loadAllEvents = () => async (dispatch) => {
-  const res = await fetch("/api/events/");
+  const res = await fetch("/api/events",{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }});
 
   if (!res.ok) return;
   const data = await res.json();
@@ -54,7 +59,11 @@ export const loadAllEvents = () => async (dispatch) => {
 };
 
 export const loadUserEvents = (userId) => async (dispatch) =>{
-  const res = await fetch (`/api/users/events/${Number(userId)}`)
+  const res = await fetch (`/api/users/events/${Number(userId)}`,{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }})
   if(!res.ok) return
 
   const data = await res.json()
@@ -66,7 +75,11 @@ export const loadUserEvents = (userId) => async (dispatch) =>{
 }
 
 export const loadEventReserves = (id) => async (dispatch) => {
-  const res = await fetch(`/api/reserves/event/${id}`);
+  const res = await fetch(`/api/reserves/event/${Number(id)}`,{
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }});
   if (!res.ok) return;
   const data = await res.json();
   dispatch(addEventReserves(data))
@@ -76,9 +89,10 @@ export const loadEventReserves = (id) => async (dispatch) => {
 export const removeEvent = (id,userId) => async (dispatch) =>{
   const res = await fetch(`/api/events/delete/${Number(id)}`,{
     method: 'DELETE',
-    headers:{
-      "Content-Type": "application/json",
-    },
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     }
   });
   if(res.ok) return dispatch(loadUserEvents(userId))
 }
@@ -87,9 +101,10 @@ export const updateEvent = (name, category, description, location, city, date, u
   const when = date.toString()
   const res = await fetch(`/api/events/update/${Number(id)}`, {
     method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
+    headers : { 
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+     },
     body: JSON.stringify({
       name,
       description,

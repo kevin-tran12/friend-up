@@ -11,6 +11,8 @@ import User from "./components/User";
 import { authenticate } from "./store/session";
 import FollowingPage from "./components/userPage/Following";
 import Footer from "./components/Footer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   // const [authenticated, setAuthenticated] = useState(false);
