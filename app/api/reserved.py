@@ -35,7 +35,6 @@ def reserving(id):
             })
         if len(dict)==0:
             return '',200
-        print(dict)
         return {'reserve': dict}
 
 
@@ -53,16 +52,17 @@ def unreserve(id):
 @reserve_routes.route('/event/<int:id>')
 @login_required
 def reservedEvent(id):
-        reserves = db.session.query(Reserved, User).join(User).filter(Reserved.event_id==id).all()
-        dict = []
-        for reserve, user in reserves:
-            dict.append({
-                'id': reserve.id,
-                'user_id': reserve.user_id,
-                'event_id': reserve.event_id,
-                'name': user.username,
-            })
-        if len(dict)==0:
-            return '',200
-
-        return {'reserve': dict}
+    reserves = db.session.query(Reserved, User).join(User).filter(Reserved.event_id==id).all()
+    if len(reserves)==0:
+        return '',204
+    dict = []
+    for reserve, user in reserves:
+        dict.append({
+            'id': reserve.id,
+            'user_id': reserve.user_id,
+            'event_id': reserve.event_id,
+            'name': user.username,
+        })
+    if len(dict)==0:
+        return '',200
+    return {'reserve': dict}

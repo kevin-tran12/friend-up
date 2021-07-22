@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { Form, Modal, Col, Row } from "react-bootstrap";
+import { Form, Modal, Col, Row, Button} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../store/event";
 
@@ -9,7 +9,6 @@ export default function EventForm() {
   const dispatch = useDispatch();
   const dayte = moment();
   const nextDay = moment(dayte.add(1, "days"));
-
   const [name, setName] = useState("");
   const [category, setCategory] = useState("Night Life");
   const [location, setLocation] = useState("");
@@ -17,15 +16,15 @@ export default function EventForm() {
   const [city, setCity] = useState("");
   const [date, setDate] = useState(new Date(nextDay));
   const userId = useSelector((state) => state.session.user.id);
-
   const create = async (e) => {
     e.preventDefault();
     dispatch(
       createEvent(name, category, description, location, city, date, userId)
-    );
-  };
+      );
+    };
+    
   return (
-    <Form onSubmit={create} style={{ color: "#9bdfd9" }}>
+    <Form onSubmit={create} style={{ color: "#9bdfd9" }} className='bg-dark'>
       <Modal.Header closeButton>Create An Event</Modal.Header>
       <Form.Group as={Col} className='mb-4'>
         <Form.Label>Name</Form.Label>
@@ -71,7 +70,7 @@ export default function EventForm() {
           />
         </Form.Group>
         <Form.Group as={Col} className='mb-4'>
-          <Form.Label className='mb-4'>City</Form.Label>
+          <Form.Label>City</Form.Label>
           <Form.Control
             type="text"
             value={city}
@@ -79,7 +78,7 @@ export default function EventForm() {
             required
           />
         </Form.Group>
-      </Row >
+      </Row>
       <Form.Group>
         <Form.Label>Date</Form.Label>
         <DatePicker

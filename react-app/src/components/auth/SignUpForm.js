@@ -65,7 +65,7 @@ const SignUpForm = () => {
   }
   console.log(username)
   return (
-    <Container className='signupform'>
+    <Container className='bg-dark'>
       <h1 className='headersignup'>Sign Up</h1>
       {bool.length>0 && bool.map(err=> <h2 className='errors'>{err}</h2>)} 
       <Form onSubmit={onSignUp} style={{color:'#9bdfd9'}}>
@@ -104,8 +104,8 @@ const SignUpForm = () => {
         </Form.Group>
         </Row>
         <div className='buttonSignUp'>
-          <Button type="submit" className='mr-5'>Sign Up</Button>
-          <Button onClick={logDemo} className='ml-5'>Demo Login</Button>
+          <Button type="submit" className='mr-5 bg-light border-light text-dark'>Sign Up</Button>
+          <Button onClick={logDemo} className='ml-5 bg-light border-light text-dark'>Demo Login</Button>
         </div>
       </Form>
     </Container>

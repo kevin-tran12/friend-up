@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import { Container } from "react-bootstrap";
 function UsersList() {
   const [users, setUsers] = useState([]);
 
@@ -22,10 +22,10 @@ function UsersList() {
   });
 
   return (
-    <div className='userList'>
+    <Container className='userList bg-dark'>
       <h1>User List: </h1>
       <ul>{userComponents}</ul>
-    </div>
+    </Container>
   );
 }
 
