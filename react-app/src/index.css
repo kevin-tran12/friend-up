@@ -82,3 +82,8 @@ button{
 .userList li::marker{
     color: #9bdfd9;
 }
+
+.footer{
+    right:0;
+    width: fit-content;
+}
