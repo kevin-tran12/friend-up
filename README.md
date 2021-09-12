@@ -2,6 +2,7 @@
 # friender-up
 
 https://friender-up.herokuapp.com/
+
  A website built for people trying to make friends,join/create events, and find new hobbies with people.
  Using Flask, SQLAlchemy, ReactJS, Redux, and PostgreSQL, this website was designed and built in 2 weeks.
  ![landingPage](https://user-images.githubusercontent.com/73672338/133003881-c7f00f1a-437a-469a-8228-824bfc942692.jpg)
