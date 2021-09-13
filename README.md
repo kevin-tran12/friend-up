@@ -12,6 +12,12 @@ https://friender-up.herokuapp.com/
  - Create, edit, and delete your own events.
  - Reserve and unreserve events that you want to attend.
  - Follow and unfollow users that that you like. 
+ 
+# Event CRUD
+Creating, editing, reading, deleting events through the use of Redux.
+
+![eventreducer](https://user-images.githubusercontent.com/73672338/133007138-4dfeda90-b881-4ca9-bcc1-4c2fe7d6255e.png)
+
  # Database Schema
 
  ![image](https://user-images.githubusercontent.com/73672338/133003889-c9305f8b-af00-482c-a1b1-68d476a06801.png)
