@@ -32,9 +32,9 @@ function User() {
     return (
       <Container className="userInfo">
         <div className="userCard">
-          <h1>{user.username}'s Information</h1>
-          <div>Age: {user.age}</div>
-          <div>Description: {user.description}</div>
+          <h1>{user?.username}'s Information</h1>
+          <div>Age: {user?.age}</div>
+          <div>Description: {user?.description}</div>
         </div>
         <EventPage />
       </Container>

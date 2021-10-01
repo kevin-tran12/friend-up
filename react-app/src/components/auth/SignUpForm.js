@@ -14,12 +14,12 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [age, setAge] = useState();
   const [description, setDescription] = useState("");
-  const [matchPassword, setMatchPassword] = useState(true);
+  // const [matchPassword, setMatchPassword] = useState(true);
   const logDemo = () => dispatch(login("demo@aa.io", "password"));
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(
+      await dispatch(
         signUp(username, email, password, age, description)
       );
     }
