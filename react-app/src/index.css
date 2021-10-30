@@ -37,7 +37,7 @@ button{
 .sidebar{
     color: #9bdfd9;
     position: fixed;
-    width: 10%;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     /* top:0; */
@@ -89,6 +89,8 @@ button{
 }
 
 .reserveList{
+    display: flex;
+    flex-direction: row;
     margin-top: 5px;
     margin-left: 0;
 }
