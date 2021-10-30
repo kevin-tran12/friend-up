@@ -42,7 +42,7 @@ const NavBar = () => {
         </Navbar.Brand>
       )}
       <Modal show={form} onHide={closeForm}>
-        <EventForm/>
+        <EventForm onSubmit={closeForm}/>
       </Modal>
       {!user && (
         <li>

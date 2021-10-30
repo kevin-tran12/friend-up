@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import moment from "moment";
-import { Form, Modal, Col, Row, Button} from "react-bootstrap";
+import { Form, Modal, Col, Row, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createEvent } from "../../store/event";
 
-export default function EventForm() {
+export default function EventForm({onSubmit}) {
   const dispatch = useDispatch();
   const dayte = moment();
   const nextDay = moment(dayte.add(1, "days"));
@@ -18,15 +18,17 @@ export default function EventForm() {
   const userId = useSelector((state) => state.session.user.id);
   const create = async (e) => {
     e.preventDefault();
+    onSubmit()
+    window.alert('Success')
     dispatch(
       createEvent(name, category, description, location, city, date, userId)
-      );
-    };
-    
+    );
+  };
+
   return (
-    <Form onSubmit={create} style={{ color: "#9bdfd9" }} className='bg-dark'>
+    <Form onSubmit={create} style={{ color: "#9bdfd9" }} className="bg-dark">
       <Modal.Header closeButton>Create An Event</Modal.Header>
-      <Form.Group as={Col} className='mb-4'>
+      <Form.Group as={Col} className="mb-4">
         <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
@@ -35,7 +37,7 @@ export default function EventForm() {
           required
         />
       </Form.Group>
-      <Form.Group as={Col} className='mb-4'>
+      <Form.Group as={Col} className="mb-4">
         <Form.Label>Brief Description</Form.Label>
         <Form.Control
           type="textarea"
@@ -44,12 +46,13 @@ export default function EventForm() {
           required
         />
       </Form.Group>
-      <Form.Group className='mb-4'>
-        <Form.Label className='mr-4'>Category  :</Form.Label>
-        <Form.Control as='select'
+      <Form.Group className="mb-4">
+        <Form.Label className="mr-4">Category :</Form.Label>
+        <Form.Control
+          as="select"
           onChange={(e) => setCategory(e.target.value)}
           custom
-          className='ml-4'
+          className="ml-4"
         >
           <option value="Night Life">Night Life</option>
           <option value="Sports">Sports</option>
@@ -60,7 +63,7 @@ export default function EventForm() {
         </Form.Control>
       </Form.Group>
       <Row>
-        <Form.Group as={Col} className='mb-4'>
+        <Form.Group as={Col} className="mb-4">
           <Form.Label>Location</Form.Label>
           <Form.Control
             type="text"
@@ -69,7 +72,7 @@ export default function EventForm() {
             required
           />
         </Form.Group>
-        <Form.Group as={Col} className='mb-4'>
+        <Form.Group as={Col} className="mb-4">
           <Form.Label>City</Form.Label>
           <Form.Control
             type="text"
