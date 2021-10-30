@@ -89,14 +89,17 @@ button{
 }
 
 .reserveList{
-    display: flex;
-    flex-direction: row;
-    list-style-type: square;
     margin-top: 5px;
+    margin-left: 0;
 }
 
 .reserveListItem{
     font-size: 12px;
     margin-left: 5px;
     padding: 0;
+}
+
+.ListItems{
+    display: flex;
+    flex-direction: column;
 }
