@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { loadUserEvents, removeEvent, updateEvent } from "../../store/event";
 import DatePicker from "react-datepicker";
 import { Container, Row, Col, Modal, Form } from "react-bootstrap";
 import moment from "moment";
-import { unreserveEvent } from "../../store/reserve";
 export default function EventPage() {
   const userId = useParams();
   const dispatch = useDispatch();
-  const reserved = useSelector((state) => state.session.reserve)
   const sessUser = useSelector((state) => state.session.user.id);
   const events = useSelector((state) => Object.values(state.event));
   const eventId = useSelector((state) => state.event);
@@ -69,10 +67,18 @@ export default function EventPage() {
   const closeGoing = async (e) => {
     setGoing(false);
   };
-  const unreserve = (e) =>{
-    e.preventDefault()
-    dispatch(unreserveEvent(userId, Number(e.target.value)))
-  }
+  // console.log(Object.values(events[reserving]?.reserved))
+
+    // return events[reserving]?.reserved.forEach(person =>{
+    //   console.log(person)
+    // })
+  // }
+  
+  // const print = () =>{
+  //   console.log('printing')
+  //   return(
+  //   )))
+  // }
   const go =(
       <Modal show={true} onHide={closeGoing} style={{ color: "#9bdfd9" }}>
         <Container className="bg-dark">
@@ -86,7 +92,6 @@ export default function EventPage() {
         </Container>
       </Modal>
     );
-    console.log(reserved)
   return (
     <Container>
       <Container className="user-event">
@@ -198,7 +203,6 @@ export default function EventPage() {
                   ) : (
                     <div>No RSVP yet</div>
                   )}
-                  <button value={`${event.id}`} onClick={unreserve}>Unreserve</button>
                 </div>
               </Container>
             </Container>

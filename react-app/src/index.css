@@ -87,3 +87,16 @@ button{
     right:0;
     width: fit-content;
 }
+
+.reserveList{
+    display: flex;
+    flex-direction: row;
+    list-style-type: square;
+    margin-top: 5px;
+}
+
+.reserveListItem{
+    font-size: 12px;
+    margin-left: 5px;
+    padding: 0;
+}
